@@ -11,13 +11,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { self, darwin, home-manager, ... }: {
+  outputs = inputs @ { self, darwin, home-manager, nixpkgs, ... }: {
+    nixpkgs.config.allowUnfree = true;
+
     darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         home-manager.darwinModules.home-manager
-        ./hosts/donn-mbp/default.nix
-        # ./hosts/donn-mbp.nix
+        ./hosts/donn-mbp.nix
         # ./modules/home-manager.nix
       ];
     };

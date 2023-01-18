@@ -1,6 +1,4 @@
 {
-  services.nix-daemon.enable = true;
-
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
@@ -8,7 +6,7 @@
 
   system.defaults = {
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = null;
       AppleShowAllFiles = true;
       AppleShowScrollBars = "WhenScrolling";
       NSDocumentSaveNewDocumentsToCloud = false;
@@ -16,7 +14,7 @@
 
     dock = {
       autohide = true;
-      tilesize = 50;
+      tilesize = 40;
     };
 
     finder = {
@@ -30,7 +28,7 @@
 
     trackpad = {
       Clicking = true;
-      TrackpadThreeFingerDrag = true;
+      TrackpadThreeFingerDrag = false;
     };
   };
 }
