@@ -1,18 +1,17 @@
-{
+{ pkgs, ... }: {
   services.nix-daemon.enable = true;
 
-  # TODO: pass nixpkgs to here to install nerd fonts
-  # fonts = {
-  #   fontDir.enable = true;
-  #   fonts = [
-  #     (nixpkgs.nerdfonts.override {
-  #       fonts = [
-  #         "FiraCode"
-  #         "Hack"
-  #       ];
-  #     })
-  #   ];
-  # };
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+          "Hack"
+        ];
+      })
+    ];
+  };
 
   home-manager = {
     backupFileExtension = "bak";

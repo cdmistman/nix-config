@@ -5,13 +5,17 @@ let
   withZsh = { enableZshIntegration = true; };
 in
 {
-	home-manager.users.colton = {
+	home-manager.users.colton = { pkgs, ... }: {
 		home = {
 			enableNixpkgsReleaseCheck = true;
 			stateVersion = "22.11";
 			username = "colton";
 
-			packages = [];
+			packages = with pkgs; [
+				du-dust
+				sd
+				tokei
+			];
 			sessionPath = [
 				"$HOME/bin"
 			];
@@ -38,12 +42,11 @@ in
 		programs = {
 			bash = enabled;
 			bat = enabled // {
-				# TODO: get pkgs
-				# extraPackages = with nixpkgs.bat-extras; [
-				# 	batdiff
-				# 	batgrep
-				# 	batman
-				# ];
+				extraPackages = with pkgs.bat-extras; [
+					batdiff
+					batgrep
+					batman
+				];
 			};
 			bottom = enabled;
 

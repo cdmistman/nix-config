@@ -11,17 +11,21 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { self, darwin, home-manager, nixpkgs, ... }: {
-    nixpkgs.config.allowUnfree = true;
-
+  outputs = inputs @ { self, darwin, home-manager, nixpkgs, ... }: let
+		pkgs = system: import nixpkgs {
+			inherit system;
+			config.allowUnfree = true;
+		};
+	in {
     darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
-			inherit inputs;
+			inputs = inputs // { pkgs = pkgs "aarch64-darwin"; };
 
       system = "aarch64-darwin";
       modules = [
         home-manager.darwinModules.home-manager
         ./hosts/donn-mbp.nix
 				./users/colton.nix
+				{ home-manager.extraSpecialArgs.pkgs = pkgs "aarch64-darwin"; }
       ];
     };
   };
