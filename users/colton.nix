@@ -13,6 +13,7 @@ in
 
 			packages = with pkgs; [
 				du-dust
+				rnix-lsp
 				sd
 				tokei
 			];
@@ -106,7 +107,6 @@ in
 						format = "[$branch]($style)";
 						style = "bright-black";
 					};
-					# TODO: this isn't displaying properly :/
 					git_status = {
 						format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
 						style = "cyan";
