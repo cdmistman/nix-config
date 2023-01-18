@@ -15,11 +15,13 @@
     nixpkgs.config.allowUnfree = true;
 
     darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
+			inherit inputs;
+
       system = "aarch64-darwin";
       modules = [
         home-manager.darwinModules.home-manager
         ./hosts/donn-mbp.nix
-        # ./modules/home-manager.nix
+				./users/colton.nix
       ];
     };
   };

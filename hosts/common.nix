@@ -18,7 +18,6 @@
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.colton = import ../users/colton.nix;
   };
 
   programs = {
