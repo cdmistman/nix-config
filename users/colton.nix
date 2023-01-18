@@ -6,9 +6,21 @@ let
 in
 {
   home = {
+    enableNixpkgsReleaseCheck = true;
     stateVersion = "22.11";
-
     username = "colton";
+
+		packages = [];
+		sessionPath = [
+			"$HOME/bin"
+		];
+		shellAliases = {
+			k = "clear";
+
+			ls = "lsd -A --group-directories-first";
+			l = "ls";
+			tree = "lsd --tree";
+		};
   };
 
   editorconfig = enabled // {
@@ -24,7 +36,14 @@ in
 
   programs = {
     bash = enabled;
-    bat = enabled;
+    bat = enabled // {
+			# TODO: get pkgs
+			# extraPackages = with pkgs.bat-extras; [
+			# 	"batdiff"
+			# 	"batgrep"
+			# 	"batman"
+			# ];
+		};
     bottom = enabled;
 
     command-not-found = enabled;
@@ -35,6 +54,7 @@ in
       settings.git_protocol = "ssh";
     };
     git = enabled // {
+			userEmail = "colton@donn.io";
       userName = "Colton Donnelly";
 
       aliases = {
@@ -44,7 +64,9 @@ in
 
     lsd = enabled;
 
-    neovim = enabled;
+    neovim = enabled // {
+			defaultEditor = true;
+		};
 
     skim = enabled // withZsh // {
       defaultCommand = "fd --type f || find .";
@@ -79,6 +101,7 @@ in
           format = "[$branch]($style)";
           style = "bright-black";
         };
+				# TODO: this isn't displaying properly :/
         git_status = {
           format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
           style = "cyan";
@@ -112,9 +135,6 @@ in
         export NIXPKGS_ALLOW_UNFREE=1
         export PAGER="bat"
       '';
-      shellAliases = {
-        k = "clear";
-      };
 
       oh-my-zsh = enabled // {
         plugins = [
