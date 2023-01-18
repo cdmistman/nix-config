@@ -1,3 +1,2 @@
-inputs:
-	(import ./common.nix inputs)
+import ./common.nix
   // import ./darwin-common.nix
