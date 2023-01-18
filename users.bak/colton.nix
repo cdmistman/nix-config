@@ -9,7 +9,6 @@ in
 input @ { home-manager, ... }: {
   users.users.colton.home = homeDirectory;
 
-  home-manager.users.colton = {
     editorconfig = enabled // {
       settings."*" = {
         charset = "utf-8";
@@ -20,6 +19,7 @@ input @ { home-manager, ... }: {
         indent_size = 2;
       };
     };
+  home-manager.users.colton = {
 
     home = {
       inherit homeDirectory;
@@ -40,7 +40,7 @@ input @ { home-manager, ... }: {
         settings.git_protocol = "ssh";
       };
       git = enabled // {
-        userName = "Colton Donnelly";
+        userName = "Colton Foobar";
 
         aliases = {
           cam = "commit -am";

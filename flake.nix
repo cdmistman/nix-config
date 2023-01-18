@@ -16,8 +16,9 @@
       system = "aarch64-darwin";
       modules = [
         home-manager.darwinModules.home-manager
-        ./hosts/donn-mbp.nix
-        ./modules/home-manager.nix
+        ./hosts/donn-mbp/default.nix
+        # ./hosts/donn-mbp.nix
+        # ./modules/home-manager.nix
       ];
     };
   };
