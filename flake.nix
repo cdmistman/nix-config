@@ -17,6 +17,7 @@
 			config.allowUnfree = true;
 		};
 	in {
+		# overlays = import ./overlays { inherit self inputs; };
     darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
 			inputs = inputs // { pkgs = pkgs "aarch64-darwin"; };
 

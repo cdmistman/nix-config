@@ -13,6 +13,8 @@ in
 
 			packages = with pkgs; [
 				du-dust
+				fd
+				helix
 				rnix-lsp
 				sd
 				tokei
@@ -53,7 +55,9 @@ in
 
 			command-not-found = enabled;
 
-			direnv = enabled // withZsh;
+			direnv = enabled // withZsh // {
+				nix-direnv = enabled;
+			};
 
 			gh = enabled // {
 				settings.git_protocol = "ssh";
@@ -65,6 +69,10 @@ in
 				aliases = {
 					cam = "commit -am";
 				};
+				extraConfig = {
+					init.defaultBranch = "main";
+					url."ssh://git@github.com".insteadOf = "github";
+				};
 			};
 
 			lsd = enabled;
@@ -75,6 +83,7 @@ in
 
 			skim = enabled // withZsh // {
 				defaultCommand = "fd --type f || find .";
+				defaultOptions = ["--preview 'bat --color=always --style=numbers --line-range=:500 {}'"];
 			};
 			starship = enabled // withZsh // {
 				settings = {
@@ -111,11 +120,11 @@ in
 						format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
 						style = "cyan";
 						conflicted = "";
-						untracked = "​";
-						modified = "​";
-						staged = "​";
-						renamed = "​";
-						deleted = "​";
+						untracked = "";
+						modified = "";
+						staged = "";
+						renamed = "";
+						deleted = "";
 						stashed = "≡";
 					};
 					git_state = {
@@ -129,6 +138,7 @@ in
 
 			vscode = enabled;
 
+			zellij = enabled;
 			zoxide = enabled // withZsh;
 			zsh = enabled // {
 				autocd = false;
@@ -138,7 +148,8 @@ in
 				profileExtra = ''
 					# because i'm sick of setting this every time i run darwin-rebuild
 					export NIXPKGS_ALLOW_UNFREE=1
-					export PAGER="bat"
+					# export PAGER="bat "
+					export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 				'';
 
 				oh-my-zsh = enabled // {
@@ -155,6 +166,18 @@ in
 						"vi-mode"
 					];
 				};
+				plugins = [
+					{
+						name = "zsh-nix-shell";
+						file = "nix-shell.plugin.zsh";
+						src = pkgs.fetchFromGitHub {
+							owner = "chisui";
+							repo = "zsh-nix-shell";
+							rev = "v0.5.0";
+							sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+						};
+					}
+				];
 			};
 		};
 	};
