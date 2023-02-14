@@ -1,34 +1,32 @@
 {
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToEscape = true;
-  };
+	system.keyboard = {
+		enableKeyMapping = true;
+		remapCapsLockToEscape = true;
+	};
 
-  system.defaults = {
-    NSGlobalDomain = {
-      AppleInterfaceStyle = null;
-      AppleShowAllFiles = true;
-      AppleShowScrollBars = "WhenScrolling";
-      NSDocumentSaveNewDocumentsToCloud = false;
-    };
+	system.defaults = {
+		NSGlobalDomain = {
+			AppleInterfaceStyle = null;
+			AppleShowAllFiles = true;
+			AppleShowScrollBars = "WhenScrolling";
+			NSDocumentSaveNewDocumentsToCloud = false;
+		};
 
-    dock = {
-      autohide = true;
-      tilesize = 40;
-    };
+		dock = {
+			autohide = true;
+			tilesize = 40;
+		};
 
-    finder = {
-      AppleShowAllFiles = true;
-      CreateDesktop = false;
-      ShowPathbar = true;
-      ShowStatusBar = true;
-    };
+		finder = {
+			AppleShowAllFiles = true;
+			CreateDesktop = false;
+			ShowPathbar = true;
+			ShowStatusBar = true;
+		};
 
-    loginwindow.GuestEnabled = true;
-
-    trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = false;
-    };
-  };
+		trackpad = {
+			Clicking = true;
+			TrackpadThreeFingerDrag = false;
+		};
+	};
 }

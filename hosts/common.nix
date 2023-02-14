@@ -1,27 +1,27 @@
 {
-  services.nix-daemon.enable = true;
+	services.nix-daemon.enable = true;
 
 	# TODO: get `pkgs` here...
-  # fonts = {
-  #   fontDir.enable = true;
-  #   fonts = with pkgs; [
-  #     (nerdfonts.override {
-  #       fonts = [
-  #         "FiraCode"
-  #         "Hack"
-  #       ];
-  #     })
-  #   ];
-  # };
+	# fonts = {
+	#   fontDir.enable = true;
+	#   fonts = with pkgs; [
+	#     (nerdfonts.override {
+	#       fonts = [
+	#         "FiraCode"
+	#         "Hack"
+	#       ];
+	#     })
+	#   ];
+	# };
 
-  home-manager = {
-    backupFileExtension = "bak";
-    useGlobalPkgs = true;
-    useUserPackages = true;
-  };
+	home-manager = {
+		backupFileExtension = "bak";
+		useGlobalPkgs = true;
+		useUserPackages = true;
+	};
 
-  programs = {
-    bash.enable = false;
-    zsh.enable = true;
-  };
+	programs = {
+		bash.enable = false;
+		zsh.enable = true;
+	};
 }

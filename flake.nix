@@ -18,16 +18,16 @@
 		};
 	in {
 		# overlays = import ./overlays { inherit self inputs; };
-    darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
+		darwinConfigurations.donn-mbp = darwin.lib.darwinSystem {
 			inputs = inputs // { pkgs = pkgs "aarch64-darwin"; };
 
-      system = "aarch64-darwin";
-      modules = [
-        home-manager.darwinModules.home-manager
-        ./hosts/donn-mbp.nix
+			system = "aarch64-darwin";
+			modules = [
+				home-manager.darwinModules.home-manager
+				./hosts/donn-mbp.nix
 				./users/colton.nix
 				{ home-manager.extraSpecialArgs.pkgs = pkgs "aarch64-darwin"; }
-      ];
-    };
-  };
+			];
+		};
+	};
 }
