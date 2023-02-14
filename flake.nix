@@ -30,13 +30,13 @@
 			];
 		};
 
-		darwinConfigurations.colton-replit-mbp = darwin.lib.darwinSystem {
+		darwinConfigurations.replit-mbp = darwin.lib.darwinSystem {
 			inputs = inputs // { pkgs = pkgs "aarch64-darwin"; };
 
 			system = "aarch64-darwin";
 			modules = [
 				home-manager.darwinModules.home-manager
-				./hosts/colton-replit-mbp.nix
+				./hosts/replit-mbp.nix
 				./users/colton.nix
 				{ home-manager.extraSpecialArgs.pkgs = pkgs "aarch64-darwin"; }
 			];
