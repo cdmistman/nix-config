@@ -15,7 +15,7 @@ in
 				du-dust
 				fd
 				helix
-				rnix-lsp
+				procs
 				sd
 				tokei
 			];
@@ -43,6 +43,16 @@ in
 		};
 
 		programs = {
+			# TODO: this needs to symlink into ~/Applications on mac
+			# alacritty = enabled // {
+			# 	settings = {
+			# 		font = {
+			# 			size = 14;
+			# 			normal.family = "FiraCode Nerd Font Mono";
+			# 		};
+			# 	};
+			# };
+
 			bash = enabled;
 			bat = enabled // {
 				extraPackages = with pkgs.bat-extras; [
@@ -71,6 +81,7 @@ in
 				};
 				extraConfig = {
 					init.defaultBranch = "main";
+					pull.rebase = true;
 					url."ssh://git@github.com".insteadOf = "github";
 				};
 			};
@@ -79,6 +90,8 @@ in
 
 			neovim = enabled // {
 				defaultEditor = true;
+				vimAlias = true;
+				vimdiffAlias = true;
 			};
 
 			skim = enabled // withZsh // {
