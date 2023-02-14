@@ -16,6 +16,7 @@ in
 				fd
 				helix
 				procs
+				ripgrep
 				sd
 				tokei
 			];
