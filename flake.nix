@@ -17,32 +17,34 @@
 			config.allowUnfree = true;
 		};
 	in {
-		darwinConfigurations.donn-mbp = darwin.lib.darwinSystem (
-			let
-				system = "aarch64-darwin";
-			in import ./mkSystem.nix {
-				inherit inputs system;
+		darwinConfigurations = {
+			donn-mbp = darwin.lib.darwinSystem (
+				let
+					system = "aarch64-darwin";
+				in import ./mkSystem.nix {
+					inherit inputs system;
 
-				host = "donn-mbp";
-				nixpkgs = nixpkgs-unstable;
-				modules = [
-					home-manager.darwinModules.home-manager
-				];
-			}
-		);
+					host = "donn-mbp";
+					nixpkgs = nixpkgs-unstable;
+					modules = [
+						home-manager.darwinModules.home-manager
+					];
+				}
+			);
 
-		darwinConfigurations.replit-mbp = darwin.lib.darwinSystem (
-			let
-				system = "aarch64-darwin";
-			in import ./mkSystem.nix {
-				inherit inputs system;
+			replit-mbp = darwin.lib.darwinSystem (
+				let
+					system = "aarch64-darwin";
+				in import ./mkSystem.nix {
+					inherit inputs system;
 
-				host = "replit-mbp";
-				nixpkgs = nixpkgs-unstable;
-				modules = [
-					home-manager.darwinModules.home-manager
-				];
-			}
-		);
+					host = "replit-mbp";
+					nixpkgs = nixpkgs-unstable;
+					modules = [
+						home-manager.darwinModules.home-manager
+					];
+				}
+			);
+		};
 	};
 }
