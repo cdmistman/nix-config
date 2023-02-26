@@ -2,7 +2,7 @@
   description = "My (cdmistman/colton) Nix configurations.";
 
   inputs = {
-		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+		nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,40 +11,40 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { self, darwin, home-manager, nixpkgs, nixpkgs-unstable, ... }: let
-		pkgs = system: import nixpkgs {
-			inherit system;
-			config.allowUnfree = true;
-		};
+  outputs = inputs @ { darwin, ... }: let
+		mkSystem = import ./mkSystem.nix inputs;
 	in {
 		darwinConfigurations = {
-			donn-mbp = darwin.lib.darwinSystem (
-				let
-					system = "aarch64-darwin";
-				in import ./mkSystem.nix {
-					inherit inputs system;
+			donn-mbp = mkSystem.darwin {
+				system = "aarch64-darwin";
 
-					host = "donn-mbp";
-					nixpkgs = nixpkgs-unstable;
-					modules = [
-						home-manager.darwinModules.home-manager
-					];
-				}
-			);
+				modules = [
+					{
+						nix.settings.trusted-users = [ "root" "colton" ];
+					}
+					(import ./users/colton.nix {
+						homeDirectory = "/Users/colton";
 
-			replit-mbp = darwin.lib.darwinSystem (
-				let
-					system = "aarch64-darwin";
-				in import ./mkSystem.nix {
-					inherit inputs system;
+						imports = [
+							./programs/vscode.nix
+						];
+					})
+				];
+			};
 
-					host = "replit-mbp";
-					nixpkgs = nixpkgs-unstable;
-					modules = [
-						home-manager.darwinModules.home-manager
-					];
-				}
-			);
+			replit-mbp = mkSystem.darwin {
+				system = "aarch64-darwin";
+
+				modules = [
+					(import ./users/colton.nix {
+						homeDirectory = "/home/colton";
+
+						imports = [
+							./programs/vscode.nix
+						];
+					})
+				];
+			};
 		};
 	};
 }
