@@ -1,8 +1,16 @@
 { homeDirectory, imports ? [] }: let
 in {
+	environment.systemPackages = {
+		pkgs,
+		...
+	}: {
+		environment.systemPackages = with pkgs; [
+			vscode
+		];
+	};
+
 	home-manager.users.colton =
 		{ pkgs, ... }:
-		# (import ../programs/lsd.nix) //
 		{
 			imports = imports ++ [
 				../modules/editorconfig.nix
@@ -50,17 +58,13 @@ in {
 
 				shellAliases = {
 					k = "clear";
-					ls = "lsd -A --group-directories-first";
+					ls = "lsd -A --group-directories-first --hyperlink auto";
 					l = "ls";
-					tree = "lsd --true";
+					tree = "lsd -L --tree";
 				};
 			};
 
+			programs.alacritty.enable = true;
 			programs.command-not-found.enable = true;
-			# programs = let
-			# 	enabledPrograms = [
-			# 		"command-not-found"
-			# 	];
-			# in pkgs.lib.genAttrs enabledPrograms (_: { enable = true; });
 		};
 }

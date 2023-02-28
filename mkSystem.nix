@@ -14,11 +14,15 @@ inputs @ {
 			inherit inputs pkgs system;
 
 			modules = modules ++ [
+				./modules/darwin/nix-darwin-applications.nix
 				./services/nix-daemon.nix
 				./system/common.nix
 				./system/darwin.nix
 
 				home-manager.darwinModules.home-manager
+				{
+					programs.nix-index.enable = true;
+				}
 			];
 
 

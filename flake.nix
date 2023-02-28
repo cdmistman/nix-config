@@ -29,6 +29,11 @@
 							./programs/vscode.nix
 						];
 					})
+					({ pkgs, ... }: {
+						environment.systemPackages = with pkgs; [
+							vscode
+						];
+					})
 				];
 			};
 
@@ -37,10 +42,15 @@
 
 				modules = [
 					(import ./users/colton.nix {
-						homeDirectory = "/home/colton";
+						homeDirectory = "/Users/colton";
 
 						imports = [
 							./programs/vscode.nix
+						];
+					})
+					({ pkgs, ... }: {
+						environment.systemPackages = with pkgs; [
+							vscode
 						];
 					})
 				];
