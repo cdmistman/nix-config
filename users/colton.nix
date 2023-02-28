@@ -49,8 +49,11 @@
 
 			shellAliases = {
 				k = "clear";
+				kn = "clear && printf '\\e[3J'";
 				ls = "lsd -A --group-directories-first --hyperlink auto";
 				l = "ls";
+				la = "ls -a";
+				ll = "ls -l";
 				tree = "lsd -L --tree";
 			};
 		};
