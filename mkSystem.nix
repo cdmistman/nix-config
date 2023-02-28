@@ -27,8 +27,7 @@ inputs @ {
 
 
 			specialArgs = {
-				# for some reason the passed `pkgs` doesn't allow
-				# unfree packages - this is a workaround
+				# for some reason the passed `pkgs` doesn't allow unfree packages
 				inherit pkgs;
 
 				username = "colton";
