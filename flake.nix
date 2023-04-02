@@ -38,7 +38,6 @@
 				devenv.shells.rust = {
 					packages = darwinFrameworks ++ [
 						pkgs.cargo-deny
-						pkgs.clippy
 						pkgs.cmakeMinimal
 					];
 
